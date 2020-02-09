@@ -1,0 +1,43 @@
+package com.imooc.coupon.constant;
+
+import com.imooc.coupon.exception.ParameterException;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
+import java.util.Objects;
+import java.util.stream.Stream;
+
+/**
+ * <p>
+ * 产品线枚举
+ * </p>
+ *
+ * @author zhangshichang
+ * @date 2020-02-08 23:36
+ */
+@Getter
+@AllArgsConstructor
+public enum ProductLine {
+
+    DAMAO("大猫", 1),
+    DABAO("大宝", 2);
+
+    /**
+     * 产品线描述
+     */
+    private String description;
+
+    /**
+     * 产品线编码
+     */
+    private Integer code;
+
+    public static ProductLine of(Integer code) {
+        Objects.requireNonNull(code);
+        return Stream.of(values())
+                .filter(bean -> bean.code.equals(code))
+                .findAny()
+                .orElseThrow(() -> new ParameterException(code + "not exists!"));
+    }
+
+}

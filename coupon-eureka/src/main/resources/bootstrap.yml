@@ -1,0 +1,48 @@
+## ----------------------------------------- 多实例 Eureka Server 配置
+#spring:
+#  application:
+#    name: coupon-eureka
+#  profiles: server1
+#server:
+#  port: 8000
+#eureka:
+#  instance:
+#    hostname: server1
+#    # 不允许一台机器上部署多实例，设置为false即可使用同一台机器部署多实例
+#    prefer-ip-address: false
+#  client:
+#    # 设置 Eureka Server 所在地址，查询服务和注册服务都需要该地址
+#    service-url:
+#      defaultZone: http://server2:$8001/eureka/,http://server3:$8002/eureka/
+#
+#---
+#spring:
+#  application:
+#    name: coupon-eureka
+#  profiles: server2
+#server:
+#  port: 8001
+#eureka:
+#  instance:
+#    hostname: server2
+#    prefer-ip-address: false
+#  client:
+#    # 设置 Eureka Server 所在地址，查询服务和注册服务都需要该地址
+#    service-url:
+#      defaultZone: http://server1:$8000/eureka/,http://server3:$8002/eureka/
+#
+#---
+#spring:
+#  application:
+#    name: coupon-eureka
+#  profiles: server3
+#server:
+#  port: 8002
+#eureka:
+#  instance:
+#    hostname: server3
+#    prefer-ip-address: false
+#  client:
+#    # 设置 Eureka Server 所在地址，查询服务和注册服务都需要该地址
+#    service-url:
+#      defaultZone: http://server1:$8000/eureka/,http://server2:$8001/eureka/
